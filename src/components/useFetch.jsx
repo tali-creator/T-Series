@@ -13,7 +13,7 @@ export default function useFetch(url) {
             if(!res.ok){
                 throw Error("Unable to fetch Data from the api")
             }
-            res.json()
+           return res.json()
         })
         .then(data => {
             setData(data);
