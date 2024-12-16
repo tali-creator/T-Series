@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router-dom'
+import Nav from './components/nav'
+import Footer from './components/footer'
 
 export default function Layouts() {
   return (
-    <div>
+    <div className='flex flex-col'>
         <nav>
-
+            <Nav />
         </nav>
 
         <main>
@@ -12,7 +14,7 @@ export default function Layouts() {
         </main>
 
         <footer>
-
+          <Footer />
         </footer>
     </div>
   )
