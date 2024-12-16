@@ -163,10 +163,10 @@ export default function Categories() {
   return (
     <div className="w-full bg-black/90">
       <h1 className="text-2xl font-black text-orange-700">Categories</h1>
-      <div className="px-7 flex">
+      <div className="px-7 flex flex-col md:flex-row space-y-5 md:space-y-0">
         <div className="py-6 px-3 flex justify-evenly w-full flex-none h-fit flex-wrap gap-2 md:w-2/4">
           {movieCategories.map((category) => (
-            <button
+            <button 
               onClick={() => handleView(category)}
               key={category.id}
               className="px-3 py-1 border-2 transition-colors duration-200 rounded-full border-orange-700 text-orange-700 hover:bg-orange-700 hover:text-black font-black"
@@ -176,7 +176,7 @@ export default function Categories() {
           ))}
         </div>
 
-        <div className="border-l-2 w-full flex flex-wrap px-10 justify-around border-orange-700">
+        <div className="md:border-l-2 border-t-2 md:border-t-0 w-full flex flex-wrap px-10 justify-around border-orange-700">
           <h1 className="text-2xl font-black text-orange-700 py-3">{showCategory ? showCategory.title : "Click category to view movies"}</h1>
 
           <div className="flex  flex-wrap gap-3 max-h-[400px] overflow-y-scroll">
