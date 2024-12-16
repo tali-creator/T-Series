@@ -54,7 +54,7 @@ export default function Details() {
               onClick={next}
               className="fa fa-angle-right absolute right-0 text-3xl px-3 py-1.5 text-orange-700 font-black transition ease-in-out duration-200 hover:bg-white/30 rounded-full"></button>
           </div>
-          <div className="md:w-1/3 w-full px-7 space-y-5 my-5">
+          <div className="md:w-1/3 w-full px-7 space-y-3 my-5 ">
             <h1 className="text-orange-700 font-black text-3xl mt-4">
               {data.title}
             </h1>
@@ -135,7 +135,6 @@ export default function Details() {
                   </span>
                 ))}
             </p>
-            
           </div>
         </div>
       )}
