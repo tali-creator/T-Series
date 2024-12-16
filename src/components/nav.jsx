@@ -13,7 +13,7 @@ export default function Nav() {
     }
   }
   return (
-    <div className="flex py-2 bg-black/90 justify-between px-7 w-full">
+    <div className="flex z-90 py-2 bg-black/90 justify-between px-7 relative w-full">
       <Link to={"/"} className="text-orange-700 font-black text-xl">T-Series</Link>
         <div className="hidden sm:flex justify-center md:w-1/2 h-fit">
             <Search />
@@ -47,21 +47,25 @@ export default function Nav() {
             <Search />
         </div>
           <NavLink
+          onClick={handleToggle}
             to={"/"}
             className="hover:text-white/80 hover:border-b border-orange-700 transition-colors duration-200">
             Home
           </NavLink>
           <NavLink
+           onClick={handleToggle}
             to={"/catergories"}
             className="hover:text-white/80 hover:border-b border-orange-700 transition-colors duration-200">
             Catergories
           </NavLink>
           <NavLink
+           onClick={handleToggle}
             to={"/about"}
             className="hover:text-white/80 hover:border-b border-orange-700 transition-colors duration-200">
             About
           </NavLink>
           <NavLink
+           onClick={handleToggle}
             to={"/contact"}
             className="hover:text-white/80 hover:border-b border-orange-700 transition-colors duration-200">
             Contact-Us

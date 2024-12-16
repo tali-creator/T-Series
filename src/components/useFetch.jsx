@@ -8,19 +8,29 @@ export default function useFetch(url) {
   useEffect(() => {
     if (!url) return;
 
-    setDataIsPending(true);
-    setError(null);
+    const fetchData = async () => {
+      setDataIsPending(true);
+      setError(null);
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
+      try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const data = await response.json();
         setData(data);
         setDataIsPending(false);
-      })
-      .catch((error) => {
+        console.log(data)
+      } catch (err) {
+        console.error(err);
         setError("Error fetching data");
         setDataIsPending(false);
-      });
+      }
+    };
+
+    fetchData();
   }, [url]);
 
   return { data, dataIsPending, error };

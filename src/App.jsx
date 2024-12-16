@@ -12,6 +12,7 @@ import Categories from "./pages/categories";
 import Contact from "./pages/contact";
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/css/brands.css';
+import Details from "./components/details";
 
 
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="catergories" element={<Categories />} />
+        <Route path="movies/:id" element={ <Details />}/>
       </Route>
     )
   );
