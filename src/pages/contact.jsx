@@ -50,7 +50,7 @@ export default function Contact() {
     }
   }
   return (
-    <div className="bg-black/90 min-h-screen flex flex-col justify-center items-center">
+    <div className="min-h-screen flex flex-col justify-center items-center">
       <h1 className="text-4xl font-black text-orange-700 ">Contact Us</h1>
       <div className="w-full md:w-2/3 lg:w-1/2 h-auto border border-orange-900 p-7 rounded-2xl">
       <form onSubmit={submitmessage} action="" className="space-y-5  text-orange-700">

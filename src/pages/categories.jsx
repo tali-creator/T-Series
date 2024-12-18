@@ -137,14 +137,22 @@ export default function Categories() {
       title: "Superhero",
       url: `https://api.themoviedb.org/3/discover/movie?api_key=${
         import.meta.env.VITE_TMDB_API_KEY
-      }&with_keywords=superhero`,
+      }&with_keywords=9715`,
     },
     {
       id: 20,
       title: "Biographical",
       url: `https://api.themoviedb.org/3/discover/movie?api_key=${
         import.meta.env.VITE_TMDB_API_KEY
-      }&with_keywords=biography`,
+      }&with_keywords=3376`,
+    },
+    {
+      id: 21,
+      title: "NollyHood",
+      url: `https://api.themoviedb.org/3/discover/movie?api_key=${
+        import.meta.env.VITE_TMDB_API_KEY
+      }&with_origin_country=NG
+`,
     },
   ];
 
@@ -152,7 +160,11 @@ export default function Categories() {
     setShowCategory(category);
   }
 
-  const { data: categories, dataIsPending, error } = useFetch(showCategory?.url);
+  const {
+    data: categories,
+    dataIsPending,
+    error,
+  } = useFetch(showCategory?.url);
 
   useEffect(() => {
     if (showCategory) {
@@ -161,32 +173,37 @@ export default function Categories() {
   }, [showCategory]);
 
   return (
-    <div className="w-full bg-black/90">
-      <h1 className="text-2xl font-black text-orange-700">Categories</h1>
-      <div className="px-7 flex flex-col md:flex-row space-y-5 md:space-y-0">
+    <div className="w-full">
+      <h1 className="text-2xl pl-3 font-black text-orange-700">Categories</h1>
+      <div className=" flex flex-col md:flex-row space-y-5 md:space-y-0">
         <div className="py-6 px-3 flex justify-evenly w-full flex-none h-fit flex-wrap gap-2 md:w-2/4">
+          {/* mapping out all movies category title */}
           {movieCategories.map((category) => (
-            <button 
+            <button
               onClick={() => handleView(category)}
               key={category.id}
-              className="px-3 py-1 border-2 transition-colors duration-200 rounded-full border-orange-700 text-orange-700 hover:bg-orange-700 hover:text-black font-black"
-            >
+              className="px-3 py-1 border-2 transition-colors duration-200 rounded-full border-orange-700 text-orange-700 hover:bg-orange-700 hover:text-black font-black">
               {category.title}
             </button>
           ))}
         </div>
 
-        <div className="md:border-l-2 border-t-2 md:border-t-0 w-full flex flex-wrap px-10 justify-around border-orange-700">
-          <h1 className="text-2xl font-black text-orange-700 py-3">{showCategory ? showCategory.title : "Click category to view movies"}</h1>
+        <div className="md:border-l-2 border-t-2 md:border-t-0 w-full flex flex-wrap  justify-center  border-orange-700">
+          <h1 className="text-2xl font-black text-orange-700 py-3">
+            {showCategory
+              ? showCategory.title
+              : "Click category to view movies"}
+          </h1>
 
+          {/* pending spinner animation */}
           <div className="flex  flex-wrap gap-3 max-h-[400px] overflow-y-scroll">
-            {dataIsPending && (
-              <Loading />
-            )}
+            {dataIsPending && <Loading />}
+            {/* error message incase data was not fetched */}
             {error && <div className="text-red-500">{error}</div>}
-            
+
+            {/* displaying selected categories movies  */}
             {categories && categories.results && !dataIsPending && (
-              <MovieCard movies={categories.results} block={"block"}/>
+              <MovieCard movies={categories.results} block={"block"} />
             )}
           </div>
         </div>

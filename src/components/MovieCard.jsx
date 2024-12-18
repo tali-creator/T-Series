@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function MovieCard({movies , block}) {
     
   return (
-    <div  className={`flex gap-5  ${block? "flex-wrap" : "flex"} ${block? "overflow-y-scroll" : "overflow-x-scroll"} ${block? "mx-auto" : "mx-0"}`}>
+    <div  className={`flex gap-5  ${block? "flex-wrap" : "flex"}  w-full ${block? "justify-center" : ""} ${block? "overflow-y-scroll" : "overflow-x-scroll"} ${block? "mx-auto" : "mx-0"}`}>
         {movies.map((movie) => (
     
         <Link to={`/movies/${movie.id}`} key={movie.id} className="w-fit h-fit cursor-pointer">
@@ -22,3 +22,4 @@ export default function MovieCard({movies , block}) {
     </div>
   );
 }
+ 

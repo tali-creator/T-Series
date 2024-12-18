@@ -4,12 +4,12 @@ import Footer from './components/footer'
 
 export default function Layouts() {
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col  space'>
         <nav>
             <Nav />
         </nav>
 
-        <main>
+        <main className='pt-10 bg-black/90'>
             <Outlet />
         </main>
 

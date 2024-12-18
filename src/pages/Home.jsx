@@ -15,6 +15,10 @@ export default function Home() {
   const animationMoviesUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${
     import.meta.env.VITE_TMDB_API_KEY
   }&language=en-US&with_genres=16&page=1`;
+  const nollyHoodUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${
+    import.meta.env.VITE_TMDB_API_KEY
+  }&with_origin_country=NG
+`;
   const {
     data: popularMovies,
     dataIspending,
@@ -23,6 +27,7 @@ export default function Home() {
   const { data: animatedMovies } = useFetch(animationMoviesUrl);
   const { data: topRated } = useFetch(topRatedMoviesUrl);
   const { data: tvSeries } = useFetch(tvSeriesUrl);
+  const {data: nollyHood} = useFetch(nollyHoodUrl)
 
   if (dataIspending) {
     return setTimeout(() => {
@@ -38,14 +43,15 @@ export default function Home() {
   // console.log(tvSeries.results);
   // console.log(animatedMovies.results);
   // console.log(popularMovies.results);
-  
+
   const Pmovies = (popularMovies?.results || []).map((data1) => data1);
   const series = (tvSeries?.results || []).map((data1) => data1);
   const Tmovies = (topRated?.results || []).map((data1) => data1);
   const animations = (animatedMovies?.results || []).map((data1) => data1);
+  const nigerianMovies = (nollyHood?.results || []).map((data1) => data1);
 
   return (
-    <div className="bg-black/90 w-full h-auto px-7 space-y-7">
+    <div className=" w-full h-auto px-7 space-y-7">
       {dataIspending && <Loading />}
       {error && <div> {error}</div>}
       <div className="flex flex-col ">
@@ -68,11 +74,16 @@ export default function Home() {
         </h1>
         {tvSeries && <MovieCard movies={series} />}
       </div>
+      <div className="flex flex-col ">
+        <h1 className="text-orange-700 font-black text-2xl pb-3">NollyHood</h1>
+        {nollyHood && <MovieCard movies={nigerianMovies} />}
+      </div>
 
       <div className="flex flex-col ">
         <h1 className="text-orange-700 font-black text-2xl pb-3">Animations</h1>
         {animatedMovies && <MovieCard movies={animations} />}
       </div>
+
     </div>
   );
 }

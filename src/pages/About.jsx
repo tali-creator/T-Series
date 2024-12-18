@@ -2,7 +2,7 @@
 export default function About() {
   return (
     <div>
-      <div className="bg-black/90 text-white p-8 space-y-6">
+      <div className=" text-white p-8 space-y-6">
   <h1 className="text-4xl font-bold text-orange-500">About T-Series</h1>
   <p className="text-lg leading-relaxed">
     Welcome to <span className="font-bold text-orange-500">T-Series</span>, your ultimate destination for exploring the world of movies and TV shows. We are passionate about connecting movie enthusiasts with the latest blockbusters, timeless classics, top-rated TV series, and animated masterpieces. 
