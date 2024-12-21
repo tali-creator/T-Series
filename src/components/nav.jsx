@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Search from "./search";
+import { AuthContext } from "./AuthContext";
 
 const movieCategories = [
   {
@@ -153,26 +154,28 @@ export default function Nav() {
   const [notMatch, setNotMatch] = useState("Start typing to search...");
   // const [movie, setMovie] = useState(null);
 
+  const { isLoggedIn, logout } = useContext(AuthContext);
+
   function handleToggle() {
     setToggle((prev) => !prev);
   }
 
   useEffect(() => {
     const fetchAllMovies = async () => {
-      const moviesCollection = []; // Full movie objects (title & ID)
+      const moviesCollection = [];
 
       try {
-        // Fetch all movie categories in parallel
+        // Fetch all movie
         const responses = await Promise.all(
           movieCategories.map((category) => fetch(category.url))
         );
 
-        // Parse the JSON for all fetched responses
+        // Parse all respose
         const moviesData = await Promise.all(
           responses.map((res) => res.json())
         );
 
-        // Extract relevant data (title and ID) from each category's results
+        //get title and id
         moviesData.forEach((data) => {
           if (data.results) {
             const movies = data.results.map((movie) => ({
@@ -183,7 +186,7 @@ export default function Nav() {
           }
         });
 
-        setMovieTitle(moviesCollection); // Save movies with title & ID
+        setMovieTitle(moviesCollection);
       } catch (error) {
         console.error("Error fetching movies:", error.message);
       }
@@ -221,14 +224,14 @@ export default function Nav() {
 
   return (
     <div
-      className={`flex z-90 py-2 ${
+      className={`flex z-90 py-2 pt-5 ${
         showResults ? "bg-black" : "bg-black/90"
       }  justify-between px-7 ${showResults ? "fixed" : "relative"} w-full`}>
       <Link to={"/"} className="text-orange-700 font-black text-xl">
         T-Series
       </Link>
 
-      {/* Search Section */}
+      {/* Search */}
       <div className="hidden sm:flex flex-col items-center md:w-1/2 h-fit">
         <Search
           handleSearch={handleSearch}
@@ -255,7 +258,7 @@ export default function Nav() {
       </div>
 
       {/* Navbar Links desktop view*/}
-      <div className="w-fit space-x-3 text-orange-700 hidden sm:flex">
+      <div className="w-fit space-x-3 text-orange-700 hidden sm:flex pr-5">
         <NavLink
           to={"/"}
           className="hover:text-white/80 transition-colors duration-200">
@@ -276,11 +279,48 @@ export default function Nav() {
           className="hover:text-white/80 transition-colors duration-200">
           Contact-Us
         </NavLink>
-        <NavLink
-              to={"/login"}
-              className="hover:text-white/80 px-2  border border-orange-700 transition-colors duration-200">
-            Log in
-            </NavLink>
+
+        {/* mini user dropdown */}
+        <div className={`w-fit items-center flex flex-col space-y-3 relative `}>
+          <span
+            onClick={handleToggle}
+            className=" fa fa-user border w-fit p-1 rounded-full hover:text-black/80 hover:bg-orange-700"></span>
+          <div
+            className={`${toggle ? "flex" : "hidden"} w-[80px] ${
+              toggle ? "absolute" : ""
+            } top-10 flex-col space-y-1`}>
+            {isLoggedIn ? (
+              <>
+                <Link
+                  onClick={handleToggle}
+                  to={"/upload"}
+                  className="onClick={handleToggle}hover:text-black/80 hover:bg-orange-700 px-2 rounded border flex-none flex w-full border-orange-700 transition-colors duration-200">
+                  Upload
+                </Link>
+                <button
+                  onClick={logout}
+                  className="hover:text-black/80 hover:bg-orange-700 px-2 rounded border flex-none flex w-full border-orange-700 transition-colors duration-200">
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  onClick={handleToggle}
+                  to={"/login"}
+                  className="hover:text-black/80 hover:bg-orange-700 px-2 rounded border flex-none flex w-full border-orange-700 transition-colors duration-200">
+                  Log In
+                </Link>
+                <Link
+                  onClick={handleToggle}
+                  to={"/signup"}
+                  className="hover:text-black/80 hover:bg-orange-700 px-2 rounded border flex-none flex w-full border-orange-700 transition-colors duration-200">
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Mobile Menu view*/}
@@ -331,7 +371,38 @@ export default function Nav() {
               className="hover:text-white/80 hover:border-b border-orange-700 transition-colors duration-200">
               Contact-Us
             </NavLink>
-            
+            <div className="flex w-fit space-x-5 justify-start">
+              {isLoggedIn ? (
+                <>
+                  <Link
+                  onClick={handleToggle}
+                    to={"/upload"}
+                    className="hover:text-black/80 hover:bg-orange-700 font-black px-2 rounded border flex-none flex w-full border-orange-700 transition-colors duration-200">
+                    Upload
+                  </Link>
+                  <button
+                    onClick={logout}
+                    className="hover:text-black/80 hover:bg-orange-700 font-black px-2 rounded border flex-none flex w-full border-orange-700 transition-colors duration-200">
+                    Log Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                  onClick={handleToggle}
+                    to={"/login"}
+                    className="hover:text-black/80 hover:bg-orange-700 font-black px-2 rounded border flex-none flex w-full border-orange-700 transition-colors duration-200">
+                    Log In
+                  </Link>
+                  <Link
+                  onClick={handleToggle}
+                    to={"/signup"}
+                    className="hover:text-black/80 hover:bg-orange-700 font-black px-2 rounded border flex-none flex w-full border-orange-700 transition-colors duration-200">
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         )}
       </div>

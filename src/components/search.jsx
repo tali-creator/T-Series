@@ -3,7 +3,7 @@ export default function Search({ handleSearch, onBlur, onFocus }) {
   return (
     <form
       action=""
-      className="md:w-4/5 rounded-full border border-orange-700 overflow-hidden">
+      className="md:w-4/5 w-40 rounded-full border border-orange-700 overflow-hidden">
       <input
         type="text"
         onFocus={onFocus} // Show results on focus

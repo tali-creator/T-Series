@@ -19,6 +19,7 @@ export default function Home() {
     import.meta.env.VITE_TMDB_API_KEY
   }&with_origin_country=NG
 `;
+  const personUpload = `https://6763337017ec5852cae863a0.mockapi.io/movies/api/movies`
   const {
     data: popularMovies,
     dataIspending,
@@ -28,6 +29,7 @@ export default function Home() {
   const { data: topRated } = useFetch(topRatedMoviesUrl);
   const { data: tvSeries } = useFetch(tvSeriesUrl);
   const {data: nollyHood} = useFetch(nollyHoodUrl)
+  const {data: personal} = useFetch(personUpload)
 
   if (dataIspending) {
     return setTimeout(() => {
@@ -42,7 +44,7 @@ export default function Home() {
   // console.log(topRated.results);
   // console.log(tvSeries.results);
   // console.log(animatedMovies.results);
-  // console.log(popularMovies.results);
+  console.log(personal);
 
   const Pmovies = (popularMovies?.results || []).map((data1) => data1);
   const series = (tvSeries?.results || []).map((data1) => data1);
@@ -50,6 +52,7 @@ export default function Home() {
   const animations = (animatedMovies?.results || []).map((data1) => data1);
   const nigerianMovies = (nollyHood?.results || []).map((data1) => data1);
 
+  
   return (
     <div className=" w-full h-auto px-7 space-y-7">
       {dataIspending && <Loading />}
@@ -84,6 +87,10 @@ export default function Home() {
         {animatedMovies && <MovieCard movies={animations} />}
       </div>
 
+      <div className="flex flex-col ">
+        <h1 className="text-orange-700 font-black text-2xl pb-3">Personal Uploads</h1>
+        {personal && <MovieCard movies={personal} personal={personal} />}
+      </div>
     </div>
   );
 }
