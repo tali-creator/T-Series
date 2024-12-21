@@ -5,6 +5,8 @@ import Loading from "../components/Loading";
 
 export default function Categories() {
   const [showCategory, setShowCategory] = useState(null);
+
+  // creating diferent movie category end point as an array of objects
   const movieCategories = [
     {
       id: 1,
@@ -156,6 +158,7 @@ export default function Categories() {
     },
   ];
 
+  // fiunction to handle view
   function handleView(category) {
     setShowCategory(category);
   }

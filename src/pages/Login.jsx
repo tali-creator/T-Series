@@ -32,6 +32,7 @@ export default function Login() {
   
         const user = data.find((user) => user.email === email);
   
+        // Checking if returned user exist then loggin user in 
         if (user) {
           
           if (user.password === password) {

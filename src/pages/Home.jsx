@@ -3,6 +3,7 @@ import MovieCard from "../components/MovieCard";
 import useFetch from "../components/useFetch";
 
 export default function Home() {
+  // URLs to fetch data from different genre
   const tvSeriesUrl = `https://api.themoviedb.org/3/tv/top_rated?api_key=${
     import.meta.env.VITE_TMDB_API_KEY
   }&language=en-US&page=1`;
@@ -20,6 +21,8 @@ export default function Home() {
   }&with_origin_country=NG
 `;
   const personUpload = `https://6763337017ec5852cae863a0.mockapi.io/movies/api/movies`
+
+  // fetching data using custon hooks useState
   const {
     data: popularMovies,
     dataIspending,
@@ -46,6 +49,7 @@ export default function Home() {
   // console.log(animatedMovies.results);
   console.log(personal);
 
+  // mapping through returned data
   const Pmovies = (popularMovies?.results || []).map((data1) => data1);
   const series = (tvSeries?.results || []).map((data1) => data1);
   const Tmovies = (topRated?.results || []).map((data1) => data1);

@@ -13,6 +13,7 @@ export default function SignUp() {
   const [CPasswordError, setCPasswordError] = useState("");
    const { login } = useContext(AuthContext);
 
+  //  full name validation
   const validateFullName = () => {
     if (!fullName) {
       setFNError("Please enter a valid full name");
@@ -25,6 +26,8 @@ export default function SignUp() {
       return true;
     }
   };
+
+  // email validation
 
   const validateEmail = () => {
     if (!email) {
@@ -39,6 +42,7 @@ export default function SignUp() {
     }
   };
 
+  // password validation
   const validatePassword = () => {
     let isValid = true;
 

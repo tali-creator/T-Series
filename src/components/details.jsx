@@ -10,12 +10,12 @@ export default function Details() {
   }`;
   const { data, dataIsPending, error } = useFetch(url);
 
-  const [presentView, setPresentView] = useState(null); // Initial placeholder state
+  const [presentView, setPresentView] = useState(null);
 
   useEffect(() => {
     if (data) {
       const img1 = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
-      setPresentView(img1); // Set initial image when data is loaded
+      setPresentView(img1); 
     }
   }, [data]);
 
@@ -44,7 +44,7 @@ export default function Details() {
           <div className="w-fit h-auto relative flex items-center">
             <img
               className="rounded-xl "
-              src={presentView} // Controlled image view
+              src={presentView} 
               alt={data.title}
             />
             <button

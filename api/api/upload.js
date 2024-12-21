@@ -13,9 +13,13 @@ export const config = {
 
 const uploadHandler = (req, res) => {
   const form = new formidable.IncomingForm();
-  form.uploadDir = './'; // Temporary directory to store files before they are moved
-  form.keepExtensions = true; // Keep the original file extensions
 
+  // Temporary directory to store files before they are moved
+  form.uploadDir = './'; 
+
+   // Keep the original file extensions
+
+  form.keepExtensions = true;
   form.parse(req, (err, fields, files) => {
     if (err) {
       console.error("Error parsing the form:", err);
@@ -23,7 +27,7 @@ const uploadHandler = (req, res) => {
       return;
     }
 
-    // Move the file to a public directory (public/uploads)
+    // Move the file to a public directory public/uploas
     const filePath = files.file[0].filepath;
     const targetPath = path.join('./public/uploads', files.file[0].newFilename);
 
@@ -34,7 +38,7 @@ const uploadHandler = (req, res) => {
         return;
       }
 
-      // Return the file URL to be used on the frontend
+      // Return the file URL to be used 
       const fileUrl = `/uploads/${files.file[0].newFilename}`;
       res.status(200).json({ url: fileUrl });
     });

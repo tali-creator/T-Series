@@ -42,7 +42,9 @@ export default function UploadMovie() {
           setMessage(null);
         }, 5000);
 
-        return result.url;  // Return the uploaded file URL
+
+         // Retyrn the uploadd file URL
+        return result.url; 
       } else {
         throw new Error("Failed to upload image");
       }
@@ -54,7 +56,8 @@ export default function UploadMovie() {
         setMessage(null);
       }, 5000);
 
-      throw error;  // Throw error to be caught in the handleFileChange function
+      // throw error
+      throw error; 
     } finally {
       setLoading(false);
     }
@@ -81,15 +84,16 @@ export default function UploadMovie() {
 
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,  // Handle checkbox
+      [name]: type === "checkbox" ? checked : value,  
     }));
   };
 
   const handleUpload = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const newMovie = { ...formData, id: Date.now() }; // Use a timestamp as a unique ID
+    // Use a timestamp as a unique ID
 
+    const newMovie = { ...formData, id: Date.now() }; 
     try {
       const response = await fetch("https://6763337017ec5852cae863a0.mockapi.io/movies/api/movies", {
         method: "POST",
@@ -124,7 +128,7 @@ export default function UploadMovie() {
         onSubmit={handleUpload}
         className="space-y-3 gap-10 flex flex-col px-7 sm:flex-row justify-around w-full sm:w-4/5 md:w-4/6 lg-w-1/2">
         
-        {/* First Column of Inputs */}
+        
         <div className="w-full space-y-3 flex flex-col items-center">
           {[
             { label: "Title", name: "title", type: "text" },
@@ -141,8 +145,8 @@ export default function UploadMovie() {
                 id={name}
                 name={name}
                 type={type}
-                value={formData[name]} // Bind value from formData to the input
-                onChange={handleInputChange} // Handle input change
+                value={formData[name]} 
+                onChange={handleInputChange}
                 className="border-x-2 border-b-2 border-black/70 bg-black/20 rounded-md max-w-[270px] text-orange-700 blg-transparent hover:border-orange-700 outline-none px-3 py-1"
               />
             </div>
@@ -156,8 +160,8 @@ export default function UploadMovie() {
               id="adult"
               name="adult"
               type="checkbox"
-              checked={formData.adult} // Bind to checkbox
-              onChange={handleInputChange} // Handle checkbox change
+              checked={formData.adult} 
+              onChange={handleInputChange}
               className="border rounded-md text-orange-700 bg-white/70 hover:border-orange-700 outline-none px-3 py-1"
             />
           </div>
@@ -178,8 +182,9 @@ export default function UploadMovie() {
                 id={name}
                 name={name}
                 type={type}
-                value={formData[name]} // Bind value from formData to the input
-                onChange={handleInputChange} // Handle input change
+                 // Bind value from formData to the input
+                value={formData[name]}
+                onChange={handleInputChange} 
                 className="border-x-2 border-b-2 bg-black/20 border-black/70 rounded-md max-w-[270px] text-orange-700 hover:border-orange-700 outline-none px-3 py-1"
               />
             </div>
@@ -193,7 +198,7 @@ export default function UploadMovie() {
               id="overview"
               name="overview"
               value={formData.overview}
-              onChange={handleInputChange} // Handle textarea input change
+              onChange={handleInputChange}
               className="border-x-2 border-b-2 border-black/70 rounded-md bg-black/20 text-orange-700 min-h-[90px] hover:border-orange-700 outline-none px-3 py-1"
             ></textarea>
           </div>
@@ -212,14 +217,16 @@ export default function UploadMovie() {
                 <input
                   id={name}
                   type="file"
-                  onChange={(e) => handleFileChange(e, name)} // Call handleFileChange for file upload
+
+                  // Call handleFileChange fr file upload
+                  onChange={(e) => handleFileChange(e, name)} 
                   className="border w-full text-sm rounded-md text-orange-700 bg-white/70 hover:border-orange-700 outline-none px-3 py-1"
                 />
               </div>
             ))}
           </div>
           
-          {/* Submit Button */}
+          {/* Submit */}
           <div className="flex justify-center">
             <button
               type="submit"
